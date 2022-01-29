@@ -1,13 +1,16 @@
 <div>
   <% @tweets.reverse.each do |tweet| %>
-    <tr>
-      <h1><td><%= tweet.user.email %></td></h1>
-      <h2><td><%= tweet.body %> <% if current_user == tweet.user %>
-          <%= button_to "Delete", tweet_path(tweet.id), :confirm => "Are you sure?", method: :delete %>
-        <% end %></td></h2>
-      <h3><td><%= tweet.created_at %></td></h3>
-    </tr>
+    <div class="m-2 bg-white p-8 rounded-lg shadow-2xl">
+      <h1><%= tweet.user.email %></h1>
+      <h2><%= tweet.body %> <% if current_user == tweet.user %>
+      <button><%= button_to "Delete", tweet_path(tweet.id), :confirm => "Are you sure?", method: :delete, class:"bg-sky-500 hover:bg-sky-400 py-1 px-2 rounded-lg" %></button>
+        <% end %></h2>
+      <div class="my-2">
+        <p><%= tweet.created_at %></p>
+      </div>
+    </div>
+    
   <% end %>
+<button class="m-2 bg-sky-500 hover:bg-sky-400 py-1 px-2 rounded-lg"><%= link_to 'New Tweet', new_tweet_path(@user) %></button>
 </div>
  
-<%= link_to 'New Tweet', new_tweet_path(@user) %>

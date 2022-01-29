@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TwitterClone</title>
+    <title>Twitter Clone</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,19 +12,26 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-    <nav class="bg-gray-800">
-  <span>Rails Twitter Clone</span>
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
-</nav>
-      <%= yield %>
-    </main>
+      <div class="mx-2 flex-col justify-between">
+        <div>
+          <span>Twitter Clone</span>
+        </div>
+        <div>
+            <% if user_signed_in? %>
+              <p>Logged in as <strong><%= current_user.email %></strong>.</p>
+              <%= link_to 'Edit profile', edit_user_registration_path, class:'navbar-link' %>|
+              <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete, class:"nav-link" %>
+            <% else %>
+              <%= link_to "Sign up", new_user_registration_path, class:'navbar-link'  %> |
+              <%= link_to "Login", new_user_session_path, class:'navbar-link'  %>
+            <% end %>
+        </div>
+        <br />
+        <div>
+          <main class="container mx-auto mt-28 px-5 flex justify-center">
+            <%= yield %>
+          </main>
+        </div>
+      </div>
   </body>
 </html>
